@@ -1,0 +1,24 @@
+# Use a imagem base do Node.js
+FROM node:18
+
+# Crie o diretório de trabalho
+WORKDIR /usr/src/app
+
+# Copie os arquivos package.json e package-lock.json
+COPY package*.json ./
+
+# Instale as dependências
+RUN npm install
+
+# Copie o restante do código da aplicação
+COPY . .
+
+# Copie o dataset e o script de inicialização
+COPY dataset.json .
+COPY init-mongo.js .
+
+# Exponha a porta da aplicação
+EXPOSE 17000
+
+# Comando para iniciar a aplicação
+CMD ["sh", "-c", "node init-mongo.js && npm start"]

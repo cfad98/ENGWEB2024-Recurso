@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mongodb_service:
+    image: mongo
+    container_name: mongodb_service
+    ports:
+      - "27016:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  ex1:
+    build: ./ex1
+    container_name: ex1
+    ports:
+      - "17000:17000"
+    depends_on:
+      - mongodb_service
+    environment:
+      - MONGO_URL=mongodb://mongodb_service:27017/livros
+  
+  ex2:
+    build: ./ex2
+    container_name: ex2
+    ports:
+      - "17000:17000"
+    depends_on:
+      - mongodb_service
+    environment:
+      - MONGO_URL=mongodb://mongodb_service:27017/livros
+  
+  mongo-init:
+    image: mongo:latest
+    volumes:
+   - ./dataset/dataset.json:/dataset/dataset.json
+    command: mongoimport --host mongodb -d livros -c livros --type json --file /dataset

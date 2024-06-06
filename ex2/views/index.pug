@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .w3-container 
+    table.w3-table-all
+        tr
+            th id
+            th title
+            th author
+            th precoContratual
+            th NIPC_entidade_comunicante
+            th entidade_comunicante
+        each data in list
+            tr
+                td
+                    a(href="/" + data._id)= data._id
+                td= data.objectoContrato || 'Sem Informação'
+                td= data.dataCelebracaoContrato || 'Sem Informação'
+                td= data.precoContratual || 'Sem Informação'
+                td
+                    a(href="/entidades/" + data.NIPC_entidade_comunicante)= data.NIPC_entidade_comunicante
+                td= data.entidade_comunicante || 'Sem Informação'

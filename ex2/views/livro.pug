@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h2.w3-center
+        b Contrato 
+        span= data._id
+    .w3-container.w3-margin-bottom
+        ul.w3-ul.w3-card-4
+            li
+                b id: 
+                span= data._id
+            li
+                b idcontrato: 
+                span= data.title || 'Sem informação'
+            li
+                b author: 
+                span= data.dataAuthor || 'Sem informação'   
+            li
+               b publishDate: 
+                span= data.publishDate || 'Sem informação'
+            li 
+                b pages: 
+                if data.pages
+                    span= data.pages
+                    span  €
+                else
+                    span Sem informação.
+            li
+                b Author: 
+                span= data.author || 'Sem informação'
+
+        a.w3-button.w3-teal.w3-margin-top(href="/")
+            b Voltar à lista de Registos
